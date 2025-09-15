@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video Proctoring</title>
+  
+  <script>
+    const ROOM_ID = "<%= roomId %>";
+    const CANDIDATE_NAME = "<%= candidateName %>";
+  </script>
+
+  <!-- TensorFlow.js + COCO-SSD -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+
+  <!-- MediaPipe FaceMesh -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- PeerJS -->
+  <script defer src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js"></script>
+  <!-- Socket.io -->
+  <script src="/socket.io/socket.io.js" defer></script>
+  <!-- Custom script -->
+  <script src="/script.js" defer></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="bg-indigo-600 p-4 text-white flex justify-between items-center shadow-md">
+    <h1 class="text-xl md:text-2xl font-bold">🎥 Video Proctoring</h1>
+    <span class="text-sm md:text-base">
+      Candidate: <strong><%= candidateName %></strong>
+    </span>
+  </nav>
+
+  <!-- Main Layout -->
+  <main class="flex-1 flex flex-col md:flex-row">
+    <!-- Video Grid -->
+    <section id="video-grid" 
+      class="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 bg-black rounded-md">
+      <!-- Videos dynamically append here -->
+    </section>
+
+    <!-- Side Panel -->
+    <aside class="w-full md:w-80 bg-white shadow-lg p-4 flex flex-col border-t md:border-t-0 md:border-l border-gray-200">
+      <h2 class="text-lg font-semibold mb-4 text-indigo-700"> Proctoring Logs</h2>
+      
+      <!-- Scrollable logs -->
+      <div id="logs" class="flex-1 overflow-y-auto space-y-2 text-sm text-gray-700 bg-gray-50 p-2 rounded">
+        <p class="text-gray-500">[00:00] Session started</p>
+      </div>
+
+      <button id="downloadReport" 
+        class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
+         Download Report
+      </button>
+    </aside>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-200 text-center py-2 text-xs text-gray-600">
+    © 2025 Proctoring System | Built for Assignment
+  </footer>
+</body>
+</html>
